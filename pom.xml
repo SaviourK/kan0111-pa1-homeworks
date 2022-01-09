@@ -20,6 +20,15 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
+        <!--Spectral clustering dependencies START-->
+        <dependency>
+            <groupId>com.github.haifengl</groupId>
+            <artifactId>smile-math</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <!--Spectral clustering dependencies END-->
+
     </dependencies>
 
 </project>

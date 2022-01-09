@@ -10,27 +10,35 @@ import java.util.List;
 
 public class KMeans {
 
-    private static final int NUMBER_OF_THREADS = 8;
-    private static final int K = 20;
-    private static final int REPLICATION_FACTOR = 1000;
-    private static final String RESOURCE_FILE_NAME = "/k_means/k_means.data";
-    private static final Utils utils = new Utils();
+    private final int numberOfThreads;
+    private final int k;
+    private final int replicationFactory;
+    private final String resourceFileName;
+    private final Utils utils;
 
     private static final Logger logger = LoggerFactory.getLogger(KMeans.class);
+
+    public KMeans(int numberOfThreads, int k, int replicationFactory, String resourceFileName) {
+        this.numberOfThreads = numberOfThreads;
+        this.k = k;
+        this.replicationFactory = replicationFactory;
+        this.resourceFileName = resourceFileName;
+        this.utils = new Utils();
+    }
 
     public void start() {
         logger.info("START K-MEANS");
 
         try {
-            List<Point2D> dataset = utils.createDataSet(RESOURCE_FILE_NAME, REPLICATION_FACTOR);
+            List<Point2D> dataset = utils.createDataSet(resourceFileName, replicationFactory);
             logger.info("Data set size {}", dataset.size());
-            List<Point2D> centers = utils.initializeRandomCenters(K, 0, dataset.size());
+            List<Point2D> centers = utils.initializeRandomCenters(k, 0, dataset.size());
 
             serialKMeansCalculate(dataset, centers);
 
             parallelKMeansCalculate(dataset, centers);
         } catch (Exception e) {
-            logger.error("Cannot read data from resource file {}", RESOURCE_FILE_NAME);
+            logger.error("Cannot read data from resource file {}", resourceFileName);
         }
 
         logger.info("END K-MEANS");
@@ -48,8 +56,8 @@ public class KMeans {
     }
 
     private void parallelKMeansCalculate(List<Point2D> dataset, List<Point2D> centers) {
-        logger.info("Starting parallel K-Means calculator. Number of threads {}", NUMBER_OF_THREADS);
-        ParallelKMeansCalculator parallelKMeansCalculator = new ParallelKMeansCalculator(NUMBER_OF_THREADS);
+        logger.info("Starting parallel K-Means calculator. Number of threads {}", numberOfThreads);
+        ParallelKMeansCalculator parallelKMeansCalculator = new ParallelKMeansCalculator(numberOfThreads);
         long start = System.currentTimeMillis();
         final List<Point2D> bestCenters = parallelKMeansCalculator.parallelKMeans(centers, dataset);
         long end = System.currentTimeMillis();

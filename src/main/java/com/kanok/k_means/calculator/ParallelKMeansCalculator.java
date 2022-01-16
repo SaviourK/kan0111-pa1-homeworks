@@ -12,9 +12,8 @@ import java.util.concurrent.Executors;
 
 public class ParallelKMeansCalculator {
 
-    private final int numberOfThreads;
-
     private static final Logger logger = LoggerFactory.getLogger(ParallelKMeansCalculator.class);
+    private final int numberOfThreads;
 
     public ParallelKMeansCalculator(int numberOfThreads) {
         this.numberOfThreads = numberOfThreads;
@@ -57,7 +56,7 @@ public class ParallelKMeansCalculator {
     }
 
     private Callable<Void> createWorker(final List<Point2D> partition, final List<Point2D> centers,
-                                               final List<List<Point2D>> clusters) {
+                                        final List<List<Point2D>> clusters) {
         return () -> {
             int[] indexes = new int[partition.size()];
             for (int i = 0; i < partition.size(); i++) {

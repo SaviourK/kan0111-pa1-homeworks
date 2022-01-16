@@ -3,11 +3,11 @@ package com.kanok.n_queen;
 public class QueenThread extends Thread {
 
     private final int nMinusOne;
+    private final int[] s;
+    private final Seed server;
     private int level;
     private int seed;
-    private final int[] s;
     private long solutions;
-    private final Seed server;
 
     public QueenThread(int seed, int n, Seed server) {
         this.nMinusOne = n - 1;

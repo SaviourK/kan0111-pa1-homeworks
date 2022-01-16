@@ -10,7 +10,7 @@ public class CellularFrame extends JFrame {
         this.setContentPane(cellularPanel);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
-        this.setLocation(10,10);
+        this.setLocation(10, 10);
         this.setVisible(true);
     }
 }

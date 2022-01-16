@@ -13,19 +13,6 @@ public class Point2D {
         this.y = y;
     }
 
-    public int getNearestPointIndex(List<Point2D> points) {
-        int index = -1;
-        double minDist = Double.MAX_VALUE;
-        for (int i = 0; i < points.size(); i++) {
-            double dist = calcDistance(points.get(i));
-            if (dist < minDist) {
-                minDist = dist;
-                index = i;
-            }
-        }
-        return index;
-    }
-
     public static Point2D getMean(List<Point2D> points) {
         float accumX = 0;
         float accumY = 0;
@@ -38,6 +25,19 @@ public class Point2D {
         }
         final int pointSize = points.size();
         return new Point2D(accumX / pointSize, accumY / pointSize);
+    }
+
+    public int getNearestPointIndex(List<Point2D> points) {
+        int index = -1;
+        double minDist = Double.MAX_VALUE;
+        for (int i = 0; i < points.size(); i++) {
+            double dist = calcDistance(points.get(i));
+            if (dist < minDist) {
+                minDist = dist;
+                index = i;
+            }
+        }
+        return index;
     }
 
     public double calcDistance(Point2D secondPoint) {

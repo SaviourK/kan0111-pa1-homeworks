@@ -10,13 +10,12 @@ import java.util.List;
 
 public class KMeans {
 
+    private static final Logger logger = LoggerFactory.getLogger(KMeans.class);
     private final int numberOfThreads;
     private final int k;
     private final int replicationFactory;
     private final String resourceFileName;
     private final Utils utils;
-
-    private static final Logger logger = LoggerFactory.getLogger(KMeans.class);
 
     public KMeans(int numberOfThreads, int k, int replicationFactory, String resourceFileName) {
         this.numberOfThreads = numberOfThreads;
